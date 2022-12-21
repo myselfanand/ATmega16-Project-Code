@@ -1,0 +1,196 @@
+
+two_7segment_.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000110  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000014  00800060  00000110  00000184  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000198  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001c8  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  00000204  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000068c  00000000  00000000  00000224  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005d5  00000000  00000000  000008b0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000027e  00000000  00000000  00000e85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  00001104  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000346  00000000  00000000  00001138  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000d7  00000000  00000000  0000147e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  00001555  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 e1       	ldi	r30, 0x10	; 16
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 86 00 	jmp	0x10c	; 0x10c <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+#define F_CPU 12000000
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	cd b7       	in	r28, 0x3d	; 61
+  88:	de b7       	in	r29, 0x3e	; 62
+  8a:	64 97       	sbiw	r28, 0x14	; 20
+  8c:	0f b6       	in	r0, 0x3f	; 63
+  8e:	f8 94       	cli
+  90:	de bf       	out	0x3e, r29	; 62
+  92:	0f be       	out	0x3f, r0	; 63
+  94:	cd bf       	out	0x3d, r28	; 61
+	/* Replace with your application code */
+	DDRD = 0xFF;
+  96:	8f ef       	ldi	r24, 0xFF	; 255
+  98:	81 bb       	out	0x11, r24	; 17
+	DDRB = 0xFF;
+  9a:	87 bb       	out	0x17, r24	; 23
+	
+	
+	int a[] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};
+  9c:	84 e1       	ldi	r24, 0x14	; 20
+  9e:	e0 e6       	ldi	r30, 0x60	; 96
+  a0:	f0 e0       	ldi	r31, 0x00	; 0
+  a2:	de 01       	movw	r26, r28
+  a4:	11 96       	adiw	r26, 0x01	; 1
+  a6:	01 90       	ld	r0, Z+
+  a8:	0d 92       	st	X+, r0
+  aa:	8a 95       	dec	r24
+  ac:	e1 f7       	brne	.-8      	; 0xa6 <main+0x24>
+	
+	while(1)
+	{
+		for(int i = 0; i < 10; i++)
+  ae:	40 e0       	ldi	r20, 0x00	; 0
+  b0:	50 e0       	ldi	r21, 0x00	; 0
+  b2:	28 c0       	rjmp	.+80     	; 0x104 <main+0x82>
+		{
+			PORTD = a[i];
+  b4:	fa 01       	movw	r30, r20
+  b6:	ee 0f       	add	r30, r30
+  b8:	ff 1f       	adc	r31, r31
+  ba:	21 e0       	ldi	r18, 0x01	; 1
+  bc:	30 e0       	ldi	r19, 0x00	; 0
+  be:	2c 0f       	add	r18, r28
+  c0:	3d 1f       	adc	r19, r29
+  c2:	e2 0f       	add	r30, r18
+  c4:	f3 1f       	adc	r31, r19
+  c6:	80 81       	ld	r24, Z
+  c8:	82 bb       	out	0x12, r24	; 18
+			for(int j =0; j<10; j++)
+  ca:	80 e0       	ldi	r24, 0x00	; 0
+  cc:	90 e0       	ldi	r25, 0x00	; 0
+  ce:	15 c0       	rjmp	.+42     	; 0xfa <main+0x78>
+			{
+				PORTB = a[j];
+  d0:	fc 01       	movw	r30, r24
+  d2:	ee 0f       	add	r30, r30
+  d4:	ff 1f       	adc	r31, r31
+  d6:	21 e0       	ldi	r18, 0x01	; 1
+  d8:	30 e0       	ldi	r19, 0x00	; 0
+  da:	2c 0f       	add	r18, r28
+  dc:	3d 1f       	adc	r19, r29
+  de:	e2 0f       	add	r30, r18
+  e0:	f3 1f       	adc	r31, r19
+  e2:	20 81       	ld	r18, Z
+  e4:	28 bb       	out	0x18, r18	; 24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  e6:	3f e7       	ldi	r19, 0x7F	; 127
+  e8:	6c ef       	ldi	r22, 0xFC	; 252
+  ea:	2a e0       	ldi	r18, 0x0A	; 10
+  ec:	31 50       	subi	r19, 0x01	; 1
+  ee:	60 40       	sbci	r22, 0x00	; 0
+  f0:	20 40       	sbci	r18, 0x00	; 0
+  f2:	e1 f7       	brne	.-8      	; 0xec <main+0x6a>
+  f4:	00 c0       	rjmp	.+0      	; 0xf6 <main+0x74>
+  f6:	00 00       	nop
+	while(1)
+	{
+		for(int i = 0; i < 10; i++)
+		{
+			PORTD = a[i];
+			for(int j =0; j<10; j++)
+  f8:	01 96       	adiw	r24, 0x01	; 1
+  fa:	8a 30       	cpi	r24, 0x0A	; 10
+  fc:	91 05       	cpc	r25, r1
+  fe:	44 f3       	brlt	.-48     	; 0xd0 <main+0x4e>
+	
+	int a[] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};
+	
+	while(1)
+	{
+		for(int i = 0; i < 10; i++)
+ 100:	4f 5f       	subi	r20, 0xFF	; 255
+ 102:	5f 4f       	sbci	r21, 0xFF	; 255
+ 104:	4a 30       	cpi	r20, 0x0A	; 10
+ 106:	51 05       	cpc	r21, r1
+ 108:	ac f2       	brlt	.-86     	; 0xb4 <main+0x32>
+ 10a:	d1 cf       	rjmp	.-94     	; 0xae <main+0x2c>
+
+0000010c <_exit>:
+ 10c:	f8 94       	cli
+
+0000010e <__stop_program>:
+ 10e:	ff cf       	rjmp	.-2      	; 0x10e <__stop_program>
